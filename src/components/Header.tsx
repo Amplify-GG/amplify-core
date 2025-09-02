@@ -5,82 +5,60 @@ import { AppBar, Toolbar, Button, Box, IconButton, Typography } from "@mui/mater
 import Link from "next/link";
 
 import AppsIcon from "@mui/icons-material/Apps"; // логотип кубик
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard"; // подарочек
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"; // кубок
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // помощь
-import SearchIcon from "@mui/icons-material/Search"; // лупа
 import SettingsIcon from "@mui/icons-material/Settings"; // шестеренка
-import LanguageIcon from "@mui/icons-material/Language"; // глобус
 
 export default function Header() {
+const buttonStyle = {
+  color: "#fff",
+  fontWeight: 400,
+  fontSize: "1rem",
+  fontFamily: "'Igra Sans', sans-serif",
+  textTransform: "none",
+  px: 2
+  };
+
+  const divider = (
+    <Typography sx={{ mx: 1, color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>|</Typography>
+  );
+
   return (
     <AppBar
       position="sticky"
       sx={{
-        height: "50px",
-        minHeight: "50px",
-        maxWidth: "1365px",
-        mx: "auto",
-        backgroundColor: "rgba(26,42,108,0.85)",
-        backdropFilter: "blur(10px)",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+        height: "70px",
+        backgroundColor: "#121416",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
+        width: "100%",
       }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "50px", px: 0 }}>
-        
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "70px", px: 2 }}>
+
         {/* Левая часть */}
-        <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
-          <IconButton component={Link} href="/" sx={{ color: "#fff", mr: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <IconButton component={Link} href="/" sx={{ color: "#fff", mr: 3 }}>
             <AppsIcon />
           </IconButton>
-          {["Главная", "Ставки", "Прогнозы", "Медиа"].map((label, idx) => (
-            <Button
-              key={idx}
-              component={Link}
-              href={`/${label.toLowerCase()}`}
-              color="inherit"
-              sx={{ fontWeight: "bold", mx: 0.5 }}
-            >
-              {label}
-            </Button>
-          ))}
+
+          <Button component={Link} href="/" sx={buttonStyle}>Главная</Button>
+          {divider}
+          <Button component={Link} href="/bets" sx={buttonStyle}>Ставки</Button>
+          {divider}
+          <Button component={Link} href="/predictions" sx={buttonStyle}>Прогнозы</Button>
+          {divider}
+          <Button component={Link} href="/tournaments" sx={buttonStyle}>Турниры</Button>
+          {divider}
+          <Button component={Link} href="/promotions" sx={buttonStyle}>Акции</Button>
         </Box>
 
         {/* Правая часть */}
-        <Box sx={{ display: "flex", alignItems: "center", mr: 2 }}>
-          <IconButton color="inherit" component={Link} href="/promotions">
-            <CardGiftcardIcon />
-          </IconButton>
-          <Button color="inherit" component={Link} href="/promotions" sx={{ fontWeight: "bold", mx: 0.5 }}>
-            Акции
-          </Button>
-
-          <IconButton color="inherit" component={Link} href="/tournaments">
-            <EmojiEventsIcon />
-          </IconButton>
-          <Button color="inherit" component={Link} href="/tournaments" sx={{ fontWeight: "bold", mx: 0.5 }}>
-            Турниры
-          </Button>
-
-          <Button color="inherit" component={Link} href="/help" sx={{ fontWeight: "bold", mx: 1 }}>
-            Помощь
-          </Button>
-
-          <IconButton color="inherit" component={Link} href="/search">
-            <SearchIcon />
-          </IconButton>
-
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton color="inherit" component={Link} href="/settings">
-            <SettingsIcon />
+            <SettingsIcon sx={{ color: "#fff" }} />
           </IconButton>
-
-          <Button color="inherit" sx={{ display: "flex", alignItems: "center", mx: 1 }}>
-            <LanguageIcon sx={{ mr: 0.5 }} /> RU
-          </Button>
-
-          <Button color="inherit" component={Link} href="/login" sx={{ fontWeight: "bold", ml: 1 }}>
-            Войти
-          </Button>
+          {divider}
+          <Button component={Link} href="/login" sx={buttonStyle}>Вход</Button>
+          {divider}
+          <Button component={Link} href="/register" sx={buttonStyle}>Регистрация</Button>
         </Box>
 
       </Toolbar>

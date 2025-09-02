@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "Igra Sans";
+  src: url("/fonts/igra-sans/IgraSans.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Igra Sans";
+  src: url("/fonts/igra-sans/IgraSans.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Можно применить шрифт глобально */
+body {
+  font-family: "Igra Sans", sans-serif;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
