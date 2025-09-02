@@ -2,23 +2,58 @@
 
 import { Typography, Box, Button, Container } from "@mui/material";
 import { motion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 export default function HomePage() {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        minHeight: "200vh", // сделали длиннее для скролла
         background: "linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)",
         color: "#fff",
-        textAlign: "center",
         overflow: "hidden",
       }}
     >
-      <Container>
-        {/* Заголовок с анимацией */}
+      {/* Parallax декоративные круги */}
+      <Parallax translateY={[-50, 50]} style={{ position: "absolute", top: "20%", left: "10%" }}>
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          style={{
+            width: 120,
+            height: 120,
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.2)",
+          }}
+        />
+      </Parallax>
+
+      <Parallax translateY={[30, -60]} style={{ position: "absolute", top: "50%", right: "15%" }}>
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: "50%",
+            background: "rgba(0,0,0,0.2)",
+          }}
+        />
+      </Parallax>
+
+      <Container
+        sx={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          flexDirection: "column",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +71,7 @@ export default function HomePage() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <Typography variant="h5" sx={{ mb: 4 }}>
-            Добро пожаловать в демонстрационный проект с Material UI и анимациями
+            Теперь с параллаксом и анимацией 🎉
           </Typography>
         </motion.div>
 
