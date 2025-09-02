@@ -88,12 +88,15 @@ export default function Header() {
                 sx={{
                   width: 50,
                   height: 50,
+                  minWidth: 0,
+                  minHeight: 0,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   p: 0,
                 }}
                 color="inherit"
+                disableRipple
               >
                 <Box sx={{ width: "100%", height: "4px", bgcolor: "#fff", borderRadius: 1 }} />
                 <Box sx={{ width: "100%", height: "4px", bgcolor: "#fff", borderRadius: 1 }} />
@@ -157,5 +160,3 @@ export default function Header() {
     </>
   );
 }
-
-1231231231231231
