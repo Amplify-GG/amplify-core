@@ -5,12 +5,10 @@ import { Box, Container, Card, CardContent, Typography, Button } from "@mui/mate
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-// Пример данных прогнозов
 const predictions = [
   { id: 1, match: "Team Alpha vs Team Beta", prediction: "Победа Team Alpha", confidence: "80%" },
   { id: 2, match: "Team Gamma vs Team Delta", prediction: "Ничья", confidence: "60%" },
   { id: 3, match: "Team Epsilon vs Team Zeta", prediction: "Победа Team Zeta", confidence: "75%" },
-  { id: 4, match: "Team Theta vs Team Iota", prediction: "Победа Team Theta", confidence: "85%" },
 ];
 
 export default function PredictionsPage() {
