@@ -1,132 +1,89 @@
 "use client";
 
 import * as React from "react";
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, useScrollTrigger, Slide, Fade } from "@mui/material";
+import { AppBar, Toolbar, Button, Box, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
-import SearchIcon from "@mui/icons-material/Search";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LanguageIcon from "@mui/icons-material/Language";
-import CubeIcon from "@mui/icons-material/Apps";
 
-function HideOnScroll({ children }: { children: React.ReactElement }) {
-  const trigger = useScrollTrigger({ threshold: 50 });
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
+import AppsIcon from "@mui/icons-material/Apps"; // логотип кубик
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard"; // подарочек
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"; // кубок
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline"; // помощь
+import SearchIcon from "@mui/icons-material/Search"; // лупа
+import SettingsIcon from "@mui/icons-material/Settings"; // шестеренка
+import LanguageIcon from "@mui/icons-material/Language"; // глобус
 
 export default function Header() {
-  // State для меню "Прогнозы"
-  const [anchorPred, setAnchorPred] = React.useState<null | HTMLElement>(null);
-  const handlePredOpen = (event: React.MouseEvent<HTMLButtonElement>) => setAnchorPred(event.currentTarget);
-  const handlePredClose = () => setAnchorPred(null);
-
-  // State для меню "Помощь"
-  const [anchorHelp, setAnchorHelp] = React.useState<null | HTMLElement>(null);
-  const handleHelpOpen = (event: React.MouseEvent<HTMLButtonElement>) => setAnchorHelp(event.currentTarget);
-  const handleHelpClose = () => setAnchorHelp(null);
-
   return (
-    <HideOnScroll>
-      <AppBar
-        position="sticky"
-        sx={{
-          background: "rgba(26, 42, 108, 0.85)",
-          backdropFilter: "blur(10px)",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-        }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {/* Левая часть */}
-          <Box sx={{ display: "flex", alignItems: "center", ml: "10%" }}>
-            <IconButton component={Link} href="/" sx={{ color: "#fff", mr: 2 }}>
-              <CubeIcon />
-            </IconButton>
-            <Button component={Link} href="/" color="inherit" sx={{ fontWeight: "bold", mr: 2 }}>
-              Главная
-            </Button>
-
-            {/* Прогнозы с Dropdown */}
+    <AppBar
+      position="sticky"
+      sx={{
+        height: "50px",
+        minHeight: "50px",
+        maxWidth: "1365px",
+        mx: "auto",
+        backgroundColor: "rgba(26,42,108,0.85)",
+        backdropFilter: "blur(10px)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+      }}
+    >
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "50px", px: 0 }}>
+        
+        {/* Левая часть */}
+        <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
+          <IconButton component={Link} href="/" sx={{ color: "#fff", mr: 2 }}>
+            <AppsIcon />
+          </IconButton>
+          {["Главная", "Ставки", "Прогнозы", "Медиа"].map((label, idx) => (
             <Button
+              key={idx}
+              component={Link}
+              href={`/${label.toLowerCase()}`}
               color="inherit"
-              sx={{ fontWeight: "bold" }}
-              onMouseEnter={handlePredOpen}
-              onMouseLeave={handlePredClose}
+              sx={{ fontWeight: "bold", mx: 0.5 }}
             >
-              Прогнозы
+              {label}
             </Button>
-            <Menu
-              anchorEl={anchorPred}
-              open={Boolean(anchorPred)}
-              onClose={handlePredClose}
-              MenuListProps={{
-                onMouseEnter: handlePredOpen,
-                onMouseLeave: handlePredClose,
-              }}
-              TransitionComponent={Fade}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-              transformOrigin={{ vertical: "top", horizontal: "left" }}
-            >
-              <MenuItem component={Link} href="/predictions/esports">Киберспорт</MenuItem>
-              <MenuItem component={Link} href="/predictions/soccer">Футбол</MenuItem>
-              <MenuItem component={Link} href="/predictions/basketball">Баскетбол</MenuItem>
-            </Menu>
-          </Box>
+          ))}
+        </Box>
 
-          {/* Правая часть */}
-          <Box sx={{ display: "flex", alignItems: "center", mr: "10%" }}>
-            <Button color="inherit" sx={{ fontWeight: "bold", mr: 2 }}>
-              Войти
-            </Button>
+        {/* Правая часть */}
+        <Box sx={{ display: "flex", alignItems: "center", mr: 2 }}>
+          <IconButton color="inherit" component={Link} href="/promotions">
+            <CardGiftcardIcon />
+          </IconButton>
+          <Button color="inherit" component={Link} href="/promotions" sx={{ fontWeight: "bold", mx: 0.5 }}>
+            Акции
+          </Button>
 
-            <IconButton color="inherit" sx={{ mr: 1 }}>
-              <LanguageIcon />
-            </IconButton>
+          <IconButton color="inherit" component={Link} href="/tournaments">
+            <EmojiEventsIcon />
+          </IconButton>
+          <Button color="inherit" component={Link} href="/tournaments" sx={{ fontWeight: "bold", mx: 0.5 }}>
+            Турниры
+          </Button>
 
-            <IconButton color="inherit" sx={{ mr: 1 }}>
-              <SettingsIcon />
-            </IconButton>
+          <Button color="inherit" component={Link} href="/help" sx={{ fontWeight: "bold", mx: 1 }}>
+            Помощь
+          </Button>
 
-            <IconButton color="inherit" sx={{ mr: 1 }}>
-              <SearchIcon />
-            </IconButton>
+          <IconButton color="inherit" component={Link} href="/search">
+            <SearchIcon />
+          </IconButton>
 
-            <Typography sx={{ mx: 1 }}>|</Typography>
+          <IconButton color="inherit" component={Link} href="/settings">
+            <SettingsIcon />
+          </IconButton>
 
-            {/* Помощь с Dropdown */}
-            <IconButton
-              color="inherit"
-              onMouseEnter={handleHelpOpen}
-              onMouseLeave={handleHelpClose}
-            >
-              <HelpOutlineIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorHelp}
-              open={Boolean(anchorHelp)}
-              onClose={handleHelpClose}
-              MenuListProps={{
-                onMouseEnter: handleHelpOpen,
-                onMouseLeave: handleHelpClose,
-              }}
-              TransitionComponent={Fade}
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              <MenuItem component={Link} href="/help/faq">FAQ</MenuItem>
-              <MenuItem component={Link} href="/help/contact">Связаться с нами</MenuItem>
-              <MenuItem component={Link} href="/help/tutorials">Учебные материалы</MenuItem>
-            </Menu>
+          <Button color="inherit" sx={{ display: "flex", alignItems: "center", mx: 1 }}>
+            <LanguageIcon sx={{ mr: 0.5 }} /> RU
+          </Button>
 
-            <Button color="inherit" sx={{ fontWeight: "bold", ml: 1 }}>
-              Помощь
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </HideOnScroll>
+          <Button color="inherit" component={Link} href="/login" sx={{ fontWeight: "bold", ml: 1 }}>
+            Войти
+          </Button>
+        </Box>
+
+      </Toolbar>
+    </AppBar>
   );
 }
