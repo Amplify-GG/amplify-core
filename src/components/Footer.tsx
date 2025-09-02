@@ -20,7 +20,7 @@ export default function Footer() {
       sx={{
         backgroundColor: "#121416",
         color: "#fff",
-        mt: 6,
+        mt: 1,
         fontFamily: "'Igra Sans', sans-serif",
       }}
     >
@@ -28,29 +28,39 @@ export default function Footer() {
       <Box
         sx={{
           borderBottom: "1px solid rgba(255,255,255,0.1)",
-          py: 1.5,
+          py: 3.5, // минимальные вертикальные отступы
           textAlign: "center",
         }}
       >
         <Button
           href="https://t.me/yourbot"
           target="_blank"
+          size="small"
           sx={{
             backgroundColor: "#000",
             color: "#fff",
             textTransform: "none",
             borderRadius: 2,
-            px: 2,
+            px: 1,        // горизонтальные отступы
+            py: 0.3,      // вертикальные отступы
+            minWidth: "auto",
+            width: "auto",
+            height: 28,
             fontFamily: "'Igra Sans', sans-serif",
-            "&:hover": { backgroundColor: "#333" },
-            display: "flex",
+            fontSize: "0.78rem",
+            lineHeight: 1,
+            whiteSpace: "nowrap",
+            display: "inline-flex",
             alignItems: "center",
-            gap: 1,
-            fontSize: "0.9rem",
+            gap: 0.5,
+            mx: "auto",   // центрирование по горизонтали
+            "&:hover": { backgroundColor: "#333" },
           }}
         >
-          <Telegram sx={{ fontSize: 18 }} />
-          Telegram-бот
+          <Telegram sx={{ fontSize: 15 }} />
+          <Box component="span" sx={{ ml: 0.25 }}>
+            Telegram-бот
+          </Box>
         </Button>
       </Box>
 
@@ -211,7 +221,7 @@ export default function Footer() {
         </Container>
       </Box>
 
-      {/* Нижний блок с копирайтом и 18+ */}
+      {/* Нижний блок */}
       <Box
         sx={{
           borderTop: "1px solid rgba(255,255,255,0.1)",
@@ -222,7 +232,6 @@ export default function Footer() {
           gap: 2,
         }}
       >
-        {/* Кнопка 18+ */}
         <Button
           href="/documents"
           sx={{
