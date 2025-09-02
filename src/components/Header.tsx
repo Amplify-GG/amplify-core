@@ -32,7 +32,6 @@ export default function Header() {
   const menuItemsLeft = ['Главная', 'Ставки', 'Прогнозы', 'Турниры', 'Акции'];
   const menuItemsRight = ['Вход', 'Регистрация'];
 
-  // Контент Drawer для мобильных
   const drawerContent = (
     <Box
       sx={{
@@ -87,11 +86,11 @@ export default function Header() {
               <IconButton
                 onClick={toggleDrawer}
                 sx={{
+                  width: 50,
+                  height: 50,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  height: "40px",
-                  width: "40px",
                   p: 0,
                 }}
                 color="inherit"
