@@ -8,14 +8,15 @@ export default function HomePage() {
   return (
     <Box
       sx={{
-        minHeight: "200vh", // сделали длиннее для скролла
+        minHeight: "200vh",
         background: "linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)",
         color: "#fff",
         overflow: "hidden",
+        position: "relative",
       }}
     >
-      {/* Parallax декоративные круги */}
-      <Parallax translateY={[-50, 50]} style={{ position: "absolute", top: "20%", left: "10%" }}>
+      {/* Parallax декоративные элементы */}
+      <Parallax translateY={[-50, 50]} style={{ position: "absolute", top: "10%", left: "10%" }}>
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 5, repeat: Infinity }}
@@ -53,14 +54,14 @@ export default function HomePage() {
           zIndex: 2,
         }}
       >
-        {/* Заголовок */}
+        {/* Заголовок с анимацией */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
-            Amplify Core
+            Amplify.gg
           </Typography>
         </motion.div>
 
@@ -71,11 +72,11 @@ export default function HomePage() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           <Typography variant="h5" sx={{ mb: 4 }}>
-            Теперь с параллаксом и анимацией 🎉
+            Платформа киберспорта, ставок и прогнозов будущего
           </Typography>
         </motion.div>
 
-        {/* Кнопки */}
+        {/* Кнопки с анимацией */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -85,7 +86,7 @@ export default function HomePage() {
             variant="contained"
             sx={{
               mr: 2,
-              px: 4,
+              px: 5,
               py: 1.5,
               fontSize: "1.1rem",
               fontWeight: "bold",
@@ -103,7 +104,7 @@ export default function HomePage() {
           <Button
             variant="outlined"
             sx={{
-              px: 4,
+              px: 5,
               py: 1.5,
               fontSize: "1.1rem",
               fontWeight: "bold",
