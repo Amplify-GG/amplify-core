@@ -1,6 +1,7 @@
 "use client";
 
-import { Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
+import { Typography, Box, Button, Grid, Card, CardContent } from "@mui/material";
+import { motion } from "framer-motion";
 
 interface Match {
   id: number;
@@ -17,41 +18,56 @@ const matches: Match[] = [
 
 export default function BetsPage() {
   return (
-    <Box mt={4} mb={4}>
+    <Box mt={4} mb={6}>
       <Typography variant="h3" gutterBottom textAlign="center">
         Ставки 🎲
       </Typography>
 
-      <TableContainer component={Paper} sx={{ maxWidth: 900, mx: "auto", mt: 3 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Матч</TableCell>
-              <TableCell>Дата и время</TableCell>
-              <TableCell>Коэффициенты</TableCell>
-              <TableCell align="center">Действие</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {matches.map((match) => (
-              <TableRow key={match.id}>
-                <TableCell>{match.teams}</TableCell>
-                <TableCell>{match.date}</TableCell>
-                <TableCell>{match.odds}</TableCell>
-                <TableCell align="center">
+      <Grid container spacing={4} justifyContent="center">
+        {matches.map((match) => (
+          <Grid item key={match.id} xs={12} sm={6} md={4}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Card
+                sx={{
+                  borderRadius: "20px",
+                  background: "linear-gradient(135deg, #ff6b6b, #f06595)",
+                  color: "#fff",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+                }}
+              >
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    {match.teams}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    {match.date}
+                  </Typography>
+                  <Typography variant="body1" gutterBottom>
+                    Коэффициенты: {match.odds}
+                  </Typography>
                   <Button
                     variant="contained"
-                    color="secondary"
-                    sx={{ borderRadius: "30px", px: 3 }}
+                    sx={{
+                      mt: 2,
+                      borderRadius: "30px",
+                      px: 3,
+                      background: "linear-gradient(45deg, #2196f3, #21cbf3)",
+                      "&:hover": {
+                        background: "linear-gradient(45deg, #21cbf3, #2196f3)",
+                      },
+                    }}
                   >
                     Сделать ставку
                   </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }
