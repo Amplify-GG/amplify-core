@@ -8,13 +8,27 @@ import AppsIcon from "@mui/icons-material/Apps"; // логотип кубик
 import SettingsIcon from "@mui/icons-material/Settings"; // шестеренка
 
 export default function Header() {
-const buttonStyle = {
-  color: "#fff",
-  fontWeight: 400,
-  fontSize: "1rem",
-  fontFamily: "'Igra Sans', sans-serif",
-  textTransform: "none",
-  px: 2
+  const buttonStyle = {
+    color: "#fff",
+    fontWeight: 400,
+    fontSize: "1rem",
+    fontFamily: "'Igra Sans', sans-serif",
+    textTransform: "none",
+    px: 2,
+    transition: "all 0.2s ease",
+    "&:hover": {
+      color: "#00bfff",
+      transform: "scale(1.05)"
+    }
+  };
+
+  const iconButtonStyle = {
+    color: "#fff",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      color: "#00bfff",
+      transform: "scale(1.2)"
+    }
   };
 
   const divider = (
@@ -35,7 +49,7 @@ const buttonStyle = {
 
         {/* Левая часть */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton component={Link} href="/" sx={{ color: "#fff", mr: 3 }}>
+          <IconButton component={Link} href="/" sx={iconButtonStyle}>
             <AppsIcon />
           </IconButton>
 
@@ -52,8 +66,8 @@ const buttonStyle = {
 
         {/* Правая часть */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton color="inherit" component={Link} href="/settings">
-            <SettingsIcon sx={{ color: "#fff" }} />
+          <IconButton color="inherit" component={Link} href="/settings" sx={iconButtonStyle}>
+            <SettingsIcon />
           </IconButton>
           {divider}
           <Button component={Link} href="/login" sx={buttonStyle}>Вход</Button>
