@@ -19,7 +19,8 @@ export default function Header() {
       <AppBar
         position="sticky"
         sx={{
-          background: "linear-gradient(90deg, #3f51b5, #2196f3)",
+          background: "rgba(26, 42, 108, 0.85)", // полупрозрачный синий-пурпурный
+          backdropFilter: "blur(10px)", // эффект размытия
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
         }}
       >
@@ -29,50 +30,23 @@ export default function Header() {
           </Typography>
 
           <div>
-            <Button
-              component={Link}
-              href="/"
-              color="inherit"
-              sx={{
-                fontWeight: "bold",
-                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              component={Link}
-              href="/bets"
-              color="inherit"
-              sx={{
-                fontWeight: "bold",
-                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              }}
-            >
-              Bets
-            </Button>
-            <Button
-              component={Link}
-              href="/predictions"
-              color="inherit"
-              sx={{
-                fontWeight: "bold",
-                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              }}
-            >
-              Predictions
-            </Button>
-            <Button
-              component={Link}
-              href="/about"
-              color="inherit"
-              sx={{
-                fontWeight: "bold",
-                "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
-              }}
-            >
-              About
-            </Button>
+            {["/", "/bets", "/predictions", "/about"].map((path, idx) => {
+              const labels = ["Home", "Bets", "Predictions", "About"];
+              return (
+                <Button
+                  key={idx}
+                  component={Link}
+                  href={path}
+                  color="inherit"
+                  sx={{
+                    fontWeight: "bold",
+                    "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+                  }}
+                >
+                  {labels[idx]}
+                </Button>
+              );
+            })}
           </div>
         </Toolbar>
       </AppBar>
