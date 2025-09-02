@@ -1,124 +1,90 @@
 "use client";
 
-import { Typography, Box, Button, Container } from "@mui/material";
+import React from "react";
+import { Box, Container, Card, CardContent, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
-import { Parallax } from "react-scroll-parallax";
+import Link from "next/link";
 
-export default function HomePage() {
+// Пример данных матчей
+const matches = [
+  { id: 1, teamA: "Team Alpha", teamB: "Team Beta", date: "2025-09-05 18:00" },
+  { id: 2, teamA: "Team Gamma", teamB: "Team Delta", date: "2025-09-06 20:00" },
+  { id: 3, teamA: "Team Epsilon", teamB: "Team Zeta", date: "2025-09-07 19:30" },
+  { id: 4, teamA: "Team Theta", teamB: "Team Iota", date: "2025-09-08 17:00" },
+];
+
+export default function BetsPage() {
   return (
     <Box
       sx={{
-        minHeight: "200vh",
-        background: "linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)",
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #121416 0%, #1b1d20 100%)",
         color: "#fff",
-        overflow: "hidden",
-        position: "relative",
+        fontFamily: "'Igra Sans', sans-serif",
+        py: 5,
       }}
     >
-      {/* Parallax декоративные элементы */}
-      <Parallax translateY={[-50, 50]} style={{ position: "absolute", top: "10%", left: "10%" }}>
-        <motion.div
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 5, repeat: Infinity }}
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.2)",
+      <Container maxWidth="lg">
+        <Typography variant="h3" sx={{ mb: 4, textAlign: "center", fontWeight: 400 }}>
+          Ставки
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 24,
           }}
-        />
-      </Parallax>
-
-      <Parallax translateY={[30, -60]} style={{ position: "absolute", top: "50%", right: "15%" }}>
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: "50%",
-            background: "rgba(0,0,0,0.2)",
-          }}
-        />
-      </Parallax>
-
-      <Container
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          flexDirection: "column",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        {/* Заголовок с анимацией */}
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
         >
-          <Typography variant="h2" sx={{ fontWeight: "bold", mb: 2 }}>
-            Amplify.gg
-          </Typography>
-        </motion.div>
-
-        {/* Подзаголовок */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-        >
-          <Typography variant="h5" sx={{ mb: 4 }}>
-            Платформа киберспорта, ставок и прогнозов будущего
-          </Typography>
-        </motion.div>
-
-        {/* Кнопки с анимацией */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              mr: 2,
-              px: 5,
-              py: 1.5,
-              fontSize: "1.1rem",
-              fontWeight: "bold",
-              borderRadius: "50px",
-              background: "linear-gradient(45deg, #ff6b6b, #f06595)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-              "&:hover": {
-                background: "linear-gradient(45deg, #f06595, #ff6b6b)",
-              },
-            }}
-          >
-            Начать
-          </Button>
-
-          <Button
-            variant="outlined"
-            sx={{
-              px: 5,
-              py: 1.5,
-              fontSize: "1.1rem",
-              fontWeight: "bold",
-              borderRadius: "50px",
-              borderColor: "#fff",
-              color: "#fff",
-              "&:hover": {
-                background: "rgba(255,255,255,0.1)",
-              },
-            }}
-          >
-            Подробнее
-          </Button>
-        </motion.div>
+          {matches.map((match) => (
+            <motion.div
+              key={match.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: match.id * 0.2 }}
+              style={{ flex: "1 1 300px", maxWidth: "300px" }}
+            >
+              <Card
+                sx={{
+                  backgroundColor: "#1c1e22",
+                  borderRadius: 3,
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "100%",
+                }}
+              >
+                <CardContent sx={{ textAlign: "center" }}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>
+                    {match.teamA} vs {match.teamB}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2, color: "rgba(255,255,255,0.6)" }}>
+                    {match.date}
+                  </Typography>
+                  <Button
+                    component={Link}
+                    href={`/bets/${match.id}`}
+                    variant="contained"
+                    sx={{
+                      background: "linear-gradient(90deg, #00bfff, #1e90ff)",
+                      color: "#fff",
+                      fontFamily: "'Igra Sans', sans-serif",
+                      textTransform: "none",
+                      px: 3,
+                      py: 1,
+                      borderRadius: 2,
+                      "&:hover": { background: "linear-gradient(90deg, #1e90ff, #00bfff)" },
+                    }}
+                  >
+                    Сделать ставку
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </Box>
       </Container>
     </Box>
   );
