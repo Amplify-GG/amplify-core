@@ -54,6 +54,7 @@ export default function ImageSlider() {
         />
       ))}
 
+      {/* Кнопка "назад" */}
       <IconButton
         onClick={handlePrev}
         sx={{
@@ -69,6 +70,7 @@ export default function ImageSlider() {
         <ArrowBackIosNewIcon />
       </IconButton>
 
+      {/* Кнопка "вперёд" */}
       <IconButton
         onClick={handleNext}
         sx={{
@@ -83,6 +85,33 @@ export default function ImageSlider() {
       >
         <ArrowForwardIosIcon />
       </IconButton>
+
+      {/* Индикаторы */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          gap: 1,
+        }}
+      >
+        {images.map((_, index) => (
+          <Box
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            sx={{
+              width: 12,
+              height: 12,
+              borderRadius: "50%",
+              backgroundColor: index === currentIndex ? "#fff" : "rgba(255,255,255,0.5)",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }
