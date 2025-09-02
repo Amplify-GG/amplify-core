@@ -29,9 +29,10 @@ export default function Header() {
 
   const divider = <Box sx={{ mx: 1, color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>|</Box>;
 
-  const menuItems = ['Главная', 'Ставки', 'Прогнозы', 'Турниры', 'Акции', 'Вход', 'Регистрация'];
+  const menuItemsLeft = ['Главная', 'Ставки', 'Прогнозы', 'Турниры', 'Акции'];
+  const menuItemsRight = ['Вход', 'Регистрация'];
 
-  // Drawer контент
+  // Контент Drawer для мобильных
   const drawerContent = (
     <Box
       sx={{
@@ -48,7 +49,7 @@ export default function Header() {
       role="presentation"
       onClick={toggleDrawer}
     >
-      {menuItems.map((text) => (
+      {[...menuItemsLeft, ...menuItemsRight].map((text) => (
         <Button
           key={text}
           component={Link}
@@ -78,37 +79,45 @@ export default function Header() {
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "70px", px: 2 }}>
-          {/* Левая часть */}
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center" }}>
-            <IconButton component={Link} href="/" sx={iconButtonStyle}><AppsIcon /></IconButton>
-            {menuItems.slice(0, 5).map((text, idx) => (
-              <React.Fragment key={text}>
-                <Button component={Link} href={text === 'Главная' ? '/' : `/${text.toLowerCase()}`} sx={buttonStyle}>
-                  {text}
-                </Button>
-                {idx < 4 && divider}
-              </React.Fragment>
-            ))}
-          </Box>
+          
+          {/* Левая часть: бургер + логотип + десктоп меню */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {/* Бургер-иконка для мобильных */}
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', mr: 1 }}>
+              <IconButton
+                onClick={toggleDrawer}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "40px",
+                  width: "40px",
+                  p: 0,
+                }}
+                color="inherit"
+              >
+                <Box sx={{ width: "100%", height: "4px", bgcolor: "#fff", borderRadius: 1 }} />
+                <Box sx={{ width: "100%", height: "4px", bgcolor: "#fff", borderRadius: 1 }} />
+                <Box sx={{ width: "100%", height: "4px", bgcolor: "#fff", borderRadius: 1 }} />
+              </IconButton>
+            </Box>
 
-          {/* Бургер-иконка для мобильных */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              onClick={toggleDrawer}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "24px",
-                width: "30px",
-                p: 0,
-              }}
-              color="inherit"
-            >
-              <Box sx={{ width: "100%", height: "3px", bgcolor: "#fff", borderRadius: 1 }} />
-              <Box sx={{ width: "100%", height: "3px", bgcolor: "#fff", borderRadius: 1 }} />
-              <Box sx={{ width: "100%", height: "3px", bgcolor: "#fff", borderRadius: 1 }} />
+            {/* Логотип */}
+            <IconButton component={Link} href="/" sx={{ ...iconButtonStyle, width: 50, height: 50 }}>
+              <AppsIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
+
+            {/* Десктоп меню */}
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: "center", ml: 2 }}>
+              {menuItemsLeft.map((text, idx) => (
+                <React.Fragment key={text}>
+                  <Button component={Link} href={text === 'Главная' ? '/' : `/${text.toLowerCase()}`} sx={buttonStyle}>
+                    {text}
+                  </Button>
+                  {idx < menuItemsLeft.length - 1 && divider}
+                </React.Fragment>
+              ))}
+            </Box>
           </Box>
 
           {/* Правая часть */}
@@ -117,19 +126,19 @@ export default function Header() {
               <SettingsIcon />
             </IconButton>
             {divider}
-            {menuItems.slice(5).map((text, idx) => (
+            {menuItemsRight.map((text, idx) => (
               <React.Fragment key={text}>
                 <Button component={Link} href={text === 'Вход' ? '/login' : '/register'} sx={buttonStyle}>
                   {text}
                 </Button>
-                {idx < 1 && divider}
+                {idx < menuItemsRight.length - 1 && divider}
               </React.Fragment>
             ))}
           </Box>
+
         </Toolbar>
       </AppBar>
 
-      {/* Drawer для мобильных */}
       <Drawer
         anchor="left"
         open={mobileOpen}
