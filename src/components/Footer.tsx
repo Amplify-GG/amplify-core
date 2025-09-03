@@ -28,7 +28,7 @@ export default function Footer() {
       <Box
         sx={{
           borderBottom: "1px solid rgba(255,255,255,0.1)",
-          py: 3.5, // минимальные вертикальные отступы
+          py: 2, // минимальные вертикальные отступы
           textAlign: "center",
         }}
       >
@@ -40,9 +40,9 @@ export default function Footer() {
             backgroundColor: "#000",
             color: "#fff",
             textTransform: "none",
-            borderRadius: 2,
-            px: 1,        // горизонтальные отступы
-            py: 0.3,      // вертикальные отступы
+            borderRadius: 1.5,
+            px: 1.7,        // горизонтальные отступы
+            py: 2.1,      // вертикальные отступы
             minWidth: "auto",
             width: "auto",
             height: 28,
@@ -57,7 +57,7 @@ export default function Footer() {
             "&:hover": { backgroundColor: "#333" },
           }}
         >
-          <Telegram sx={{ fontSize: 15 }} />
+          <Telegram sx={{ fontSize: 16 }} />
           <Box component="span" sx={{ ml: 0.25 }}>
             Telegram-бот
           </Box>
